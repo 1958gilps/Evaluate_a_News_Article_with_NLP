@@ -1,4 +1,4 @@
-onst dotenv = require('dotenv');
+const dotenv = require('dotenv');
 dotenv.config();
 
 var path = require('path')
