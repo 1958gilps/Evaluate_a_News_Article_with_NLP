@@ -1,14 +1,35 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
-var path = require('path')
-var aylien = require("aylien_textapi"); // added 4-6-2020
-const express = require('express')
-const mockAPIResponse = require('./mockAPI.js')
+var aylien = require("aylien_textapi");
 
-const app = express()
+// aylien API credentials
+var textapi = new aylien({
+  application_id: process.env.API_ID,
+  application_key: process.env.API_KEY
+  });
 
-app.use(express.static('dist'))
+const path = require('path');
+const mockAPIResponse = require('./mockAPI.js');
+
+ProjectData = {};
+
+// Set up express
+const express = require('express') 
+// Start an instance of app
+const app = express(); 
+
+/* Middleware */
+const bodyParser = require('body-parser');
+//Here we are configuring express to use body-parser as middle-ware.
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// Cors for cross origin allowance
+const cors = require('cors');
+app.use(cors());
+
+app.use(express.static('dist'));
 
 // console.log(__dirname)
 
@@ -20,20 +41,34 @@ app.get('/', function (req, res) {
 // designates what port the app will listen to for incoming requests
 const port = 8080;
 
-app.listen(port, function () {
-    console.log(`Example app listening on port: ${port}!`)
-})
+// Setup Server
+const server = app.listen(port, listening);
 
-app.get('/test', function (req, res) {
-    res.send(mockAPIResponse)
-})
+function listening() {
+    console.log('server running');
+    console.log(`running on localhost: ${port}`);
+  }
+  
+  app.get('/add', function (req, res) {
+    res.send(mockAPIResponse);
+  });
 
-/*
-I changed the above from ...
-
-// designates what port the app will listen to for incoming requests
-
-app.listen(8080, function () {
-    console.log('Example app listening on port 8080!')
-})
-*/
+  // POST
+app.post('/answer', (req, res) => {
+    projectData.question = req.body.question;
+    res.send(projectData);
+  });
+  
+  // GET
+  app.get('/add', function (req, res) {
+    textapi.add(
+      {
+        text: projectData.question,
+      },
+      function (error, response) {
+        if (error === null) {
+          res.send(response);
+        }
+      }
+    );
+  });
