@@ -5,8 +5,8 @@ var aylien = require("aylien_textapi");
 
 // aylien API credentials
 var textapi = new aylien({
-  application_id: 'd99e0e5b', // process.env.API_ID,
-  application_key: process.env.API_KEY,
+  application_id: process.env.API_ID,
+  application_key: process.env.API_KEY
   });
 
 const path = require('path')
