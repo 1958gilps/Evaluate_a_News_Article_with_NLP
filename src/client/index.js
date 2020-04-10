@@ -1,5 +1,7 @@
-import { checkForQuestion } from './js/questionChecker'
 import { handleSubmit } from './js/formHandler'
+import { checkForQuestion } from './js/questionChecker'
+//import dotenv from 'dotenv'
+//dotenv.config()
 
 import './styles/resets.scss'
 import './styles/base.scss'
