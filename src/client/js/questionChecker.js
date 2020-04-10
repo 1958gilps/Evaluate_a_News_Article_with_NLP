@@ -8,15 +8,12 @@ const API_ID = 'd99e0e5b';
 
 function checkForQuestion(value, length) {
   if (length > 0 && length < 51) {
-        getData(`${Endpoint}/${API_ID}/${API_KEY}text=${value}`)
+    postData(`${Endpoint}/${value}/${API_ID}/${API_KEY}`)
+    .then(() => {
+      getData('/add', { aspect: value})
         .then(() => {
-            postData ('http://localhost:8080/answer')
-            .then ((data) => {
-            document.getElementById('answer').innerHTML = `
-            ${data.polarity}
-            ${data.text}
-    `;
-});
+           `${data.aspect}${data.text}`;
+          });
 });
       } else {
       alert('Please enter between 1 and 50 characters!');

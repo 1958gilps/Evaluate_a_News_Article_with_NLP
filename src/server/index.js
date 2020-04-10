@@ -9,15 +9,15 @@ var textapi = new aylien({
   application_key: process.env.API_KEY
   });
 
-const path = require('path');
+const path = require('path')
 const mockAPIResponse = require('./mockAPI.js');
 
-ProjectData = {};
+
 
 // Set up express
-const express = require('express') 
+const express = require('express');
 // Start an instance of app
-const app = express(); 
+const app = express();
 
 /* Middleware */
 const bodyParser = require('body-parser');
@@ -49,21 +49,23 @@ function listening() {
     console.log(`running on localhost: ${port}`);
   }
   
-  app.get('/add', function (req, res) {
+  app.get('/test', function (req, res) {
     res.send(mockAPIResponse);
   });
 
+  ProjectData = {};
+
   // POST
-app.post('/answer', (req, res) => {
-    projectData.question = req.body.question;
-    res.send(projectData);
+app.post('/add', (req, res) => {
+    projectData.aspect = req.body.aspect
+    req.send(projectData);
   });
   
   // GET
   app.get('/add', function (req, res) {
     textapi.add(
       {
-        text: projectData.question,
+        text: projectData.aspect,
       },
       function (error, response) {
         if (error === null) {
