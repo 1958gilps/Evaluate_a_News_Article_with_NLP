@@ -27,14 +27,13 @@ app.use(bodyParser.json());
 const cors = require('cors');
 app.use(cors());
 
-app.use(express.static('dist')); // @todo make this dir in ../..
+//start directory
+app.use(express.static('dist')); 
 
 // console.log(__dirname)
 
 app.get('/', function (req, res) {
-  res.sendFile('dist/index.html') // @todo update this path
-  // res.send(JSON.stringify(process.env));
-    // res.sendFile(path.resolve('src/client/views/index.html'))
+  res.sendFile('dist/index.html') 
 })
 
 // designates what port the app will listen to for incoming requests
@@ -63,8 +62,6 @@ app.post('/sentiment', (req, res) => {
     }
   });
 });
-
-//  https://api.aylien.com/api/v1/absa/hotels
 
   // POST
 app.post('/add', (req, res) => {

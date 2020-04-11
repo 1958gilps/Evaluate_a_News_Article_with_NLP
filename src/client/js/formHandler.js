@@ -8,7 +8,6 @@ function handleSubmit(event) {
     let enterLength = enterText.length;
     console.log(enterLength);
 
-    
     Client.checkForQuestion(enterText, enterLength);
 }
 
